@@ -1,0 +1,79 @@
+# thb2
+package bai1;
+
+import java.text.NumberFormat;
+public class Account {
+   
+    private long accountNumber;
+    private String accountName;
+    private double balance;
+    private String status;
+
+    // Default constructor
+    public Account() {
+        this(999999, "chua xac dinh", 50);
+    }
+
+    // Parameterized constructor
+    public Account(long accountNumber, String accountName, double balance) {
+        this.accountNumber = accountNumber;
+        this.accountName = accountName;
+        this.balance = balance;
+        this.status = "";
+    }
+
+    // Getter methods
+    public long getAccountNumber() {
+        return accountNumber;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    // Setter methods with input validation
+    public void setAccountNumber(long accountNumber) {
+        if (accountNumber <= 0 || accountNumber == 999999) {
+            this.accountNumber = 999999;
+            this.status += "Invalid account number. ";
+        } else {
+            this.accountNumber = accountNumber;
+        }
+    }
+
+    public void setAccountName(String accountName) {
+        if (accountName.isEmpty()) {
+            this.accountName = "chua xac dinh";
+            this.status += "Invalid account name. ";
+        } else {
+            this.accountName = accountName;
+        }
+    }
+
+    public void setBalance(double balance) {
+        if (balance < 50) {
+            this.balance = 50;
+            this.status += "Invalid balance. ";
+        } else {
+            this.balance = balance;
+        }
+    }
+
+    // Return a formatted string with account information
+    public String toString() {
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        String balanceString = formatter.format(balance);
+        return "Account Number: " + accountNumber + "\n" +
+               "Account Name: " + accountName + "\n" +
+               "Balance: " + balanceString + "\n" +
+               "Status: " + status + "\n";
+    }
+}
